@@ -10,26 +10,65 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            int port = 13356;
-            IPAddress ip = IPAddress.Any;
-            IPEndPoint localEndpoint = new IPEndPoint(ip, port);
+            Console.WriteLine("Hvad vil du gerne være serveren eller klienten");
+            string nummer = Console.ReadLine();
+            if (nummer == "klienten")
+            {
+                klient();
 
-            TcpListener listener = new TcpListener(localEndpoint);
-            listener.Start();
+                static void klient()
+                {
+                    TcpClient client = new TcpClient();
 
-            Console.WriteLine("Awaiting Clients");
-            TcpClient client = listener.AcceptTcpClient();
+                    int port = 13356;
+                    IPAddress ip = IPAddress.Parse("172.16.113.239");
+                    IPEndPoint endPoint = new IPEndPoint(ip, port);
 
-            NetworkStream stream = client.GetStream();
+                    client.Connect(endPoint);
 
-            byte[] buffer = new byte[256];
+                    NetworkStream stream = client.GetStream();
 
-            int numberOfBytesRead = stream.Read(buffer, 0, 256);
+                    string text = "Hello World!";
+                    byte[] buffer = Encoding.UTF8.GetBytes(text);
 
-            string message = Encoding.UTF8.GetString(buffer, 0,
-            numberOfBytesRead);
+                    stream.Write(buffer, 0, buffer.Length);
 
-            Console.WriteLine(message);
+                    client.Close();
+                }
+            }
+            else if(nummer == "serveren")
+            {
+                server();
+
+                static void server()
+                {
+                    int port = 13356;
+                    IPAddress ip = IPAddress.Any;
+                    IPEndPoint localEndpoint = new IPEndPoint(ip, port);
+
+                    TcpListener listener = new TcpListener(localEndpoint);
+                    listener.Start();
+
+                    Console.WriteLine("Awaiting Clients");
+                    TcpClient client = listener.AcceptTcpClient();
+
+                    NetworkStream stream = client.GetStream();
+
+                    byte[] buffer = new byte[256];
+
+                    int numberOfBytesRead = stream.Read(buffer, 0, 256);
+
+                    string message = Encoding.UTF8.GetString(buffer, 0,
+                    numberOfBytesRead);
+
+                    Console.WriteLine(message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Du skrev noget forkert");
+            }
         }
+            
     }
 }
