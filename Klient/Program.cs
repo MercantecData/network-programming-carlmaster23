@@ -44,7 +44,8 @@ namespace Server
 
                 NetworkStream stream = client.GetStream();
 
-                string text = "Hello World!";
+                Console.WriteLine("Skriv en besked til serveren");
+                string text = Console.ReadLine();
                 byte[] buffer = Encoding.UTF8.GetBytes(text);
 
                 stream.Write(buffer, 0, buffer.Length);
