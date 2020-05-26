@@ -3,7 +3,8 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 
-namespace Klient
+namespace Server
+
 {
     class Program
     {
@@ -11,10 +12,11 @@ namespace Klient
         {
             Console.WriteLine("Hvad vil du gerne være serveren eller klienten");
             string nummer = Console.ReadLine();
-            
             if (nummer == "klienten")
             {
                 klient();
+
+
             }
             else if (nummer == "serveren")
             {
@@ -24,14 +26,19 @@ namespace Klient
             {
                 Console.WriteLine("Du skrev noget forkert");
             }
-            
+
             static void klient()
             {
                 TcpClient client = new TcpClient();
 
-                int port = 13356;
-                IPAddress ip = IPAddress.Parse("172.16.113.239");
-                IPEndPoint endPoint = new IPEndPoint(ip, port);
+                Console.WriteLine("Skriv portnummeret");
+                int portnummer = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Skriv IPadressen");
+                string ipadresse = Console.ReadLine();
+
+                IPAddress ip = IPAddress.Parse(ipadresse);
+
+                IPEndPoint endPoint = new IPEndPoint(ip, portnummer);
 
                 client.Connect(endPoint);
 
@@ -44,12 +51,13 @@ namespace Klient
 
                 client.Close();
             }
-            
+
             static void server()
             {
-                int port = 13356;
+                int portnummer = Convert.ToInt32(Console.ReadLine());
+
                 IPAddress ip = IPAddress.Any;
-                IPEndPoint localEndpoint = new IPEndPoint(ip, port);
+                IPEndPoint localEndpoint = new IPEndPoint(ip, portnummer);
 
                 TcpListener listener = new TcpListener(localEndpoint);
                 listener.Start();
@@ -69,6 +77,5 @@ namespace Klient
                 Console.WriteLine(message);
             }
         }
-
     }
 }
