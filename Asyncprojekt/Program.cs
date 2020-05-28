@@ -48,26 +48,14 @@ namespace Asyncprojekt
 
                 NetworkStream stream = client.GetStream();
                 ReceiveMessage(stream);
-                Console.Write("Vil du skrive eller ud ");
-                string indellerud = Console.ReadLine();
-                bool kør = true;
-                while (kør)
-                {
-                    if (indellerud == "exit")
-                    {
-                        kør = false;
-                    }
-                    else
-                    {
-                        Console.Write("Write your message here: ");
-                        string text = Console.ReadLine();
-                        byte[] buffer = Encoding.UTF8.GetBytes(text);
+                
+                Console.Write("Write your message here: ");
+                string text = Console.ReadLine();
+                byte[] buffer = Encoding.UTF8.GetBytes(text);
 
-                        stream.Write(buffer, 0, buffer.Length);
+                stream.Write(buffer, 0, buffer.Length);
 
-                        Console.ReadKey();
-                    }
-                }
+                Console.ReadKey();
             }
             public async void ReceiveMessage(NetworkStream stream)
             {
@@ -94,27 +82,14 @@ namespace Asyncprojekt
 
                 NetworkStream stream = client.GetStream();
                 ReceiveMessage(stream);
+                        
+                Console.Write("Write your message here: ");
+                string text = Console.ReadLine();
+                byte[] buffer = Encoding.UTF8.GetBytes(text);
+                stream.Write(buffer, 0, buffer.Length);
 
-                bool kør = true;
-                while (kør)
-                {
-                    if (kør == false)
-                    {
-                        client.Close();
-                        kør = false;
-                    }
-                    else
-                    {
-                        Console.Write("Write your message here: ");
-                        string text = Console.ReadLine();
-                        byte[] buffer = Encoding.UTF8.GetBytes(text);
-
-                        stream.Write(buffer, 0, buffer.Length);
-
-                        Console.ReadKey();
-                    }
-                }
-                
+                Console.ReadKey();
+                client.Close();
             }
             public async void ReceiveMessage(NetworkStream stream)
             {
