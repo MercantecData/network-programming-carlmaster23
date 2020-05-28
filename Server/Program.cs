@@ -32,8 +32,8 @@ namespace Server
             {
                 int portnummer;
                 string text;
-                int beskedfraserver;
-                string serverbeskedlæsning;
+                // int beskedfraserver;
+                // string serverbeskedlæsning;
                 string ipadresse;
 
                 TcpClient client = new TcpClient();
@@ -58,19 +58,17 @@ namespace Server
 
                 stream.Write(buffer, 0, buffer.Length);
 
+                /*
                 TcpListener fåbeskendtilbage = new TcpListener(endPoint);
                 fåbeskendtilbage.Start();
-
                 Console.WriteLine("Awaiting Clients");
                 TcpClient server2 = fåbeskendtilbage.AcceptTcpClient();
-
                 NetworkStream klientsvares = server2.GetStream();
-
                 byte[] serverbesked = new byte[256];
                 beskedfraserver = stream.Read(serverbesked, 0, 256);
                 serverbeskedlæsning = Encoding.UTF8.GetString(serverbesked, 0, beskedfraserver);
                 Console.WriteLine(serverbeskedlæsning);
-
+                */
                 client.Close();
             }
 
@@ -81,10 +79,7 @@ namespace Server
                 int portnummer;
                 int numberOfBytesRead;
                 string message;
-                string beskeden;
-
-
-                TcpClient server2 = new TcpClient();
+                // string beskeden;
 
                 Console.WriteLine("Skriv portnummer");
                 portnummer = Convert.ToInt32(Console.ReadLine());
@@ -108,13 +103,14 @@ namespace Server
                 numberOfBytesRead);
 
                 Console.WriteLine(message);
-
+                /*
+                TcpClient server2 = new TcpClient();
                 server2.Connect(localEndpoint);
-
                 NetworkStream klientsvares = server2.GetStream();
                 beskeden = "Tak for din tid";
                 byte[] beskedtilklient = Encoding.UTF8.GetBytes(beskeden);
                 stream.Write(beskedtilklient, 0, beskedtilklient.Length);
+                */
             }
         }
     }
