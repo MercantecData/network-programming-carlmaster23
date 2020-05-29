@@ -8,41 +8,39 @@ namespace MultiClientserver
 {
     class klienter
     {
-        public static void klienterne()
+        public void klienterne()
         {
-            int portnummer;
-            string text;
-            // int beskedfraserver;
-            // string serverbeskedlæsning;
-            string ipadresse;
-
             TcpClient client = new TcpClient();
 
-            Console.WriteLine("Skriv portnummeret");
-            portnummer = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Skriv IPadressen");
-            ipadresse = Console.ReadLine();
-
-            IPAddress ip = IPAddress.Parse(ipadresse);
-            IPEndPoint endPoint = new IPEndPoint(ip, portnummer);
+            int port = 13356;
+            IPAddress ip = IPAddress.Parse("127.0.0.1");
+            IPEndPoint endPoint = new IPEndPoint(ip, port);
 
             client.Connect(endPoint);
+
             bool kør = true;
-            while (true)
-                if (kør == true)
-                {
-                    NetworkStream stream = client.GetStream();
-                    Console.WriteLine("Skriv en besked til serveren");
-                    text = Console.ReadLine();
-                    byte[] buffer = Encoding.UTF8.GetBytes(text);
-                    stream.Write(buffer, 0, buffer.Length);
-                }
-            else
-                { 
-                    client.Close();
-                }
-            
+            while (kør)
+            {
+                NetworkStream stream = client.GetStream();
+                ReceiveMessage(stream);
+
+                Console.Write("Write your message here: ");
+                string text = Console.ReadLine();
+                byte[] buffer = Encoding.UTF8.GetBytes(text);
+                stream.Write(buffer, 0, buffer.Length);
+            }
+
+            Console.ReadKey();
+            client.Close();
         }
+        public async void ReceiveMessage(NetworkStream stream)
+        {
+            byte[] buffer = new byte[256];
+            int numberOfBytesRead = await stream.ReadAsync(buffer, 0, 256);
+            string receivedMessage = Encoding.UTF8.GetString(buffer, 0, numberOfBytesRead);
+
+            Console.Write("\n" + "Server message: " + receivedMessage);
+        }
+
     }
 }
