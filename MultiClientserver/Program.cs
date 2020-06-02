@@ -19,7 +19,15 @@ namespace MultiClientserver
             }
             else if(statercode == "klient")
             {
-                klienter.klienterne();
+                Klienter klienten = new Klienter();
+            }
+            else if(statercode == "klienten")
+            {
+                Klienter klienten = new Klienter();
+            }
+            else if(statercode == "serveren")
+            {
+                MyServer Server = new MyServer();
             }
             else
             {

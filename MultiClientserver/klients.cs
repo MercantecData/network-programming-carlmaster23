@@ -6,7 +6,7 @@ using System.Net;
 
 namespace MultiClientserver
 {
-    class klienter
+    public class Klienter
     {
         public void klienterne()
         {
@@ -41,6 +41,5 @@ namespace MultiClientserver
 
             Console.Write("\n" + "Server message: " + receivedMessage);
         }
-
     }
 }
