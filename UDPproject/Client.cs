@@ -10,9 +10,10 @@ namespace UDPproject
         public Client()
         {
             UdpClient klient = new UdpClient();
-
-            string text = "Hello UDP!";
-            byte[] bytes = Encoding.UTF8.GetBytes(text);
+            Console.WriteLine("Skriv en besked");
+            string text = Console.ReadLine();
+            string text2 = " Hello my friend";
+            byte[] bytes = Encoding.UTF8.GetBytes(text + text2);
 
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5000);
 
