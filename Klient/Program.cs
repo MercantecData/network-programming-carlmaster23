@@ -10,9 +10,14 @@ namespace Klient
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hvad vil du gerne være serveren eller klienten");
-            string svar = Console.ReadLine();
+            // the parameters used in the code
+            string svar;
 
+            // asking you to write something
+            Console.WriteLine("Hvad vil du gerne være serveren eller klienten");
+            svar = Console.ReadLine();
+
+            // tjeking what you writen in the console 
             if (svar == "klienten")
             {
                 Klienten klient = new Klienten();

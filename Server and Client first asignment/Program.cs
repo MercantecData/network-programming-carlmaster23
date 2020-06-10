@@ -2,27 +2,38 @@
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Server_and_Client_first_asignment
 {
-    public class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hvad vil du gerne være serveren eller klienten");
-            string svar = Console.ReadLine();
+            // asking you to type something
+            Console.WriteLine("serveren eller tryk på en knap for at lukke");
+            string statercode = Console.ReadLine();
 
-            if (svar == "serveren")
+            // tjeking what you have writen
+            if (statercode == "server")
             {
-                MyServer server = new MyServer();
+                MyServer Server = new MyServer();
             }
-            else if(svar == "klienten")
+            else if (statercode == "klient")
             {
-                Klienten klient = new Klienten();
+                Klienter klienter = new Klienter();
+            }
+            else if (statercode == "klienten")
+            {
+                Klienter klienten = new Klienter();
+            }
+            else if (statercode == "serveren")
+            {
+                MyServer Server = new MyServer();
             }
             else
             {
-                Console.WriteLine("Du skrev noget forkert");
+                Console.WriteLine("closing program");
             }
         }
     }

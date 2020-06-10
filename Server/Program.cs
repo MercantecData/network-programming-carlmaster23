@@ -9,16 +9,21 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hvad vil du gerne være serveren eller klienten");
-            string nummer = Console.ReadLine();
+            // the parameters used in the code
+            string nummer;
 
+            // asking you to write something
+            Console.WriteLine("vil du gerne være serveren eller ud");
+            nummer = Console.ReadLine();
+
+            // tjeking what you writen in the console 
             if (nummer == "serveren")
             {
                 MyServer server = new MyServer();
             }
             else
             {
-                Console.WriteLine("Du skrev noget forkert");
+                Console.WriteLine("Tryk en gang mere for at lukke");
             }
         }
     }
