@@ -12,19 +12,26 @@ namespace serverogklientprogram
         {
             TcpClient client = new TcpClient();
             
+            // asking you to type port number and saving the output
             Console.WriteLine("Skriv portnummeret");
             int port = Convert.ToInt32(Console.ReadLine());
-            
+
+            // asking you to type ip adresse and saving the output
             Console.WriteLine("Skriv ip");
             string ipen = Console.ReadLine();
             
             IPAddress ip = IPAddress.Parse(ipen);
+
+            // making a object with ip port number saved inside
             IPEndPoint endPoint = new IPEndPoint(ip, port);
 
+            // connecting to server
             client.Connect(endPoint);
 
+            // starting loop
             while (true)
             {
+                // asking you to type a number and sending it to server console
                 Console.Write("Skriv et tal: ");
                 
                 NetworkStream stream = client.GetStream();
@@ -33,8 +40,11 @@ namespace serverogklientprogram
                 
                 byte[] buffer = Encoding.UTF8.GetBytes(text);
                 stream.Write(buffer, 0, buffer.Length);
+                
+                // receiving message from server after sending answer
                 ReceiveMessage(stream);
 
+            // receiving message from server function 
             static void ReceiveMessage(NetworkStream stream)
                 {
                    byte[] buffer = new byte[256];

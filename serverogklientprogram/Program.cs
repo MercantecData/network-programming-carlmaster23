@@ -10,9 +10,11 @@ namespace serverogklientprogram
     {
         static void Main(string[] args)
         {
+            // asking you to type something in the console
             Console.WriteLine("serveren eller tryk på en knap for at lukke");
             string statercode = Console.ReadLine();
 
+            //tjekking if its matching anything in the if else statments
             if (statercode == "server")
             {
                 MyServer Server = new MyServer();

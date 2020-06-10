@@ -11,36 +11,53 @@ namespace serverogklientprogram
         public List<TcpClient> clients = new List<TcpClient>();
         public MyServer()
         {
+            // the parameters used in the code
+            string message;
+            int Numbergæt;
+            bool checknumber;
+            int numberOfBytesRead;
+            int portnummer;
+            int random;
+
+            // typing the port you want to use in the console
             Console.WriteLine("Skriv portnummer");
-            int portnummer = Convert.ToInt32(Console.ReadLine());
+            portnummer = Convert.ToInt32(Console.ReadLine());
             
+            // taking your local ip adresse and using
             IPAddress ip = IPAddress.Any;
             
+            // making a object with the ip and port number inside
             IPEndPoint localEndpoint = new IPEndPoint(ip, portnummer);
             
+            // starting the server and it listen to all clients that want to join
             TcpListener listener = new TcpListener(localEndpoint);
             listener.Start();
             
             Console.WriteLine("Awaiting Clients");
             
+            // accepting clients to server            
             TcpClient client = listener.AcceptTcpClient();
             
-            int random = new Random().Next(1, 101);
+            // saving a random number between 1 and 101 and printing it in the console
+            random = new Random().Next(1, 101);
             Console.WriteLine(random);
             
+            // starting loop
             while (true)
             {
+                // Receiving the message from client and Encoding it to print in console 
                 NetworkStream stream = client.GetStream();
                 
                 byte[] buffer = new byte[256];
-                int numberOfBytesRead = stream.Read(buffer, 0, 256);
-                string message = Encoding.UTF8.GetString(buffer, 0, numberOfBytesRead);
+                numberOfBytesRead = stream.Read(buffer, 0, 256);
+                message = Encoding.UTF8.GetString(buffer, 0, numberOfBytesRead);
 
                 Console.WriteLine("Client message: " + message);
                 
-                int Numbergæt;
-                bool checknumber = Int32.TryParse(message, out Numbergæt);
+                // tjekking if it is a number, the message from client
+                checknumber = Int32.TryParse(message, out Numbergæt);
                 
+                // tjekking if its higher, lower or the right answer to random
                 if (checknumber)
                 {
                     if (Numbergæt < random)
