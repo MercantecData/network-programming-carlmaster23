@@ -13,7 +13,7 @@ namespace Asyncprojekt
             Console.WriteLine("Hvad vil du gerne være serveren eller klienten");
             string nummer = Console.ReadLine();
 
-
+            // tjekking if console.readline match
             if (nummer == "klienten")
             {
                 Clientsite client = new Clientsite();
@@ -33,6 +33,7 @@ namespace Asyncprojekt
 
             public Serversite()
             {
+                // setting up server
                 int port = 13356;
 
                 IPAddress ip = IPAddress.Any;
@@ -46,7 +47,7 @@ namespace Asyncprojekt
                 Console.WriteLine("Awaiting Clients");
                 TcpClient client = listener.AcceptTcpClient();
 
-                
+                // starting loop
                 bool kør = true;
                 while (kør)
                 {
@@ -62,6 +63,7 @@ namespace Asyncprojekt
                     Console.ReadKey();
                 
             }
+            // starting a function
             public async void ReceiveMessage(NetworkStream stream)
             {
                 byte[] buffer = new byte[256];
@@ -79,12 +81,14 @@ namespace Asyncprojekt
             {
                 TcpClient client = new TcpClient();
 
+                // connection to server
                 int port = 13356;
                 IPAddress ip = IPAddress.Parse("127.0.0.1");
                 IPEndPoint endPoint = new IPEndPoint(ip, port);
 
                 client.Connect(endPoint);
-
+                
+                // starting loop
                 bool kør = true;
                 while (kør)
                 {
@@ -100,6 +104,7 @@ namespace Asyncprojekt
                 Console.ReadKey();
                 client.Close();
             }
+            // reseiving answer from server after sent message
             public async void ReceiveMessage(NetworkStream stream)
             {
                 byte[] buffer = new byte[256];
