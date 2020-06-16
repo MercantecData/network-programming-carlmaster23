@@ -12,12 +12,14 @@ namespace MultiClientserver
         {
             TcpClient client = new TcpClient();
 
+            // connecting to server
             int port = 13356;
             IPAddress ip = IPAddress.Parse("127.0.0.1");
             IPEndPoint endPoint = new IPEndPoint(ip, port);
 
             client.Connect(endPoint);
 
+            // starting a loop 
             bool kør = true;
             while (kør)
             {
@@ -33,6 +35,8 @@ namespace MultiClientserver
             Console.ReadKey();
             client.Close();
         }
+
+        // a function that receives a answer from the server
         public async void ReceiveMessage(NetworkStream stream)
         {
             byte[] buffer = new byte[256];
