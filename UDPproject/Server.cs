@@ -9,18 +9,14 @@ namespace UDPproject
     {
         public Server()
         {
+            // awaiting answer from server
             Console.WriteLine("Awaiting answer?");
             Receiver();
             Console.ReadLine();
         }
+        // receiving message from client 
         public static async void Receiver()
         {
-            //Console.WriteLine("Skriv IP");
-            //var ip = Console.ReadLine();
-
-            //Console.WriteLine("Skriv Port");
-            //int port = Convert.ToInt32(Console.ReadLine());
-
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5000);
             UdpClient client = new UdpClient(endPoint);
 

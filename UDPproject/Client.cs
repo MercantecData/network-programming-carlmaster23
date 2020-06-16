@@ -9,6 +9,7 @@ namespace UDPproject
     {
         public Client()
         {
+            // sending message to server
             UdpClient klient = new UdpClient();
             Console.WriteLine("Skriv en besked");
             string text = Console.ReadLine();

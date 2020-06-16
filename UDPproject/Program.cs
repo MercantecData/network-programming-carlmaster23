@@ -10,6 +10,7 @@ namespace UDPproject
     {
         static void Main(string[] args)
         {
+            // asking if you want to be server or client
             Console.WriteLine("Server eller Klient");
             string serverellerklient = Console.ReadLine();
 
